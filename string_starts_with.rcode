@@ -1,0 +1,26 @@
+@Namespace string
+#Args -> string_to_check, str value_to_check
+#Returns -> str starts_with True/False
+
+function StartsWith(str string_to_check, str value_to_check);{
+    list(str) "__check"
+    list(str).ToCharArray:string_to_check; to:__check;
+    list(str) "__check__value"
+    list(str).ToCharArray:value_to_check; to:__check__value;
+    if num(__check.length+>__check__value.length); "is_possible";{
+        num final_check_n >>0
+        str starts_with >>"False"
+        for l in range:__check__value.length;{
+            getStrListValue(__check[l])
+            getStrListValue(__check__value[l])
+            if str(__check[l]==__check__value[l]); "1";{
+                ++final_check_n;
+            }1;
+        };
+
+        if num(final_check_n==__check__value.length); "2"{
+            str starts_with >>"True"
+        }2;
+    }is_possible;
+    return starts_with;
+}StartsWith;

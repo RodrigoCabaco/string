@@ -1,0 +1,2 @@
+suppress_errors()
+$modules_path$.string.string_starts_with()
