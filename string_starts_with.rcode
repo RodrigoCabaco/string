@@ -7,7 +7,8 @@ function StartsWith(str string_to_check, str value_to_check);{
     list(str).ToCharArray:string_to_check; to:__check;
     list(str) "__check__value"
     list(str).ToCharArray:value_to_check; to:__check__value;
-    if num(__check.length+>__check__value.length); "is_possible";{
+    str starts_with >>"Error: Value bigger $value_to_check$ is bigger than $string_to_check$"
+    if num(__check.length>=__check__value.length); "is_possible";{
         num final_check_n >>0
         str starts_with >>"False"
         for l in range:__check__value.length;{
@@ -17,7 +18,6 @@ function StartsWith(str string_to_check, str value_to_check);{
                 ++final_check_n;
             }1;
         };
-
         if num(final_check_n==__check__value.length); "2"{
             str starts_with >>"True"
         }2;
