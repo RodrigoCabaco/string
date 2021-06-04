@@ -2,25 +2,29 @@
 #Args -> string_to_check, str value_to_check
 #Returns -> str starts_with True/False
 
-function StartsWith(str string_to_check, str value_to_check);{
-    list(str) "__check"
-    list(str).ToCharArray:string_to_check; to:__check;
-    list(str) "__check__value"
-    list(str).ToCharArray:value_to_check; to:__check__value;
-    str starts_with >>"Error: Value bigger $value_to_check$ is bigger than $string_to_check$"
-    if num(__check.length>=__check__value.length); "is_possible";{
-        num final_check_n >>0
-        str starts_with >>"False"
-        for l in range:__check__value.length;{
-            getStrListValue(__check[l])
-            getStrListValue(__check__value[l])
-            if str(__check[l]==__check__value[l]); "1";{
-                ++final_check_n;
-            }1;
-        };
-        if num(final_check_n==__check__value.length); "2"{
-            str starts_with >>"True"
-        }2;
-    }is_possible;
-    return starts_with;
-}StartsWith;
+function StartsWith(str string_to_check, str value_to_check):
+	list(str) "list_string_to_check"
+	str _startswith >>"False"
+	if num:list_string_to_check.length>0:
+		for __range in range:list_string_to_check.length:
+			list_string_to_check.RemoveAt(0)
+
+	list(str).ToCharArray:string_to_check; to:list_string_to_check;
+	list(str) "list_val_to_check"
+	if num:list_val_to_check.length>0:
+			for __range_val in range:list_val_to_check.length:
+				list_val_to_check.RemoveAt(0)
+
+	list(str).ToCharArray:value_to_check; to:list_val_to_check;
+	
+	num final_check >>0
+	for __index__ in range:list_val_to_check.length:
+		lsval(list_val_to_check[__index__])
+		lsval(list_string_to_check[__index__])
+		if str:list_val_to_check[__index__]==list_string_to_check[__index__]:
+			++final_check;
+	
+	if num:final_check>=list_val_to_check.length:
+		str return >>"True"
+	else:
+		str return >>"False"
